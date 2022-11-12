@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a66a7b00d5cf784c95824fe4d01c8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bigCircle: {fileID: 2240041826428584913, guid: 6a6cdcd8627830d45875cf5ab681bbba, type: 3}
+  smallCircle: {fileID: 2240041826428584913, guid: 22bc155018f978340b43c1ebebdd7aea, type: 3}
 --- !u!4 &201285231
 Transform:
   m_ObjectHideFlags: 0
@@ -221,6 +223,10 @@ PrefabInstance:
     - target: {fileID: 4509344712265162, guid: 997eda0f844715845a30121b4553e2fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574405651562524, guid: 997eda0f844715845a30121b4553e2fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.54
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114231757648547274, guid: 997eda0f844715845a30121b4553e2fd, type: 3}

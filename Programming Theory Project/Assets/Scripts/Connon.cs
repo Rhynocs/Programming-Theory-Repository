@@ -19,13 +19,18 @@ public class Connon : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.isGameOver)
+            return;
+
         float x = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float y = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
         RotateWithinLimits(x, y);
 
-        if (Input.GetMouseButtonDown(0))
+        if (!IsInvoking() && Input.GetMouseButtonDown(0))
         {
             Instantiate(connonball, spawnPosition);
+            Invoke(nameof(BallDelay), 0.5f);
         }
     }
 
@@ -39,4 +44,6 @@ public class Connon : MonoBehaviour
 
         pivot.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
+
+    private void BallDelay() { }
 }

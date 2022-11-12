@@ -4,27 +4,65 @@ using UnityEngine;
 
 public abstract class Circle : MonoBehaviour
 {
-    private void Awake()
-    {
+    [SerializeField] protected int score;
 
+    private int destroyInSeconds;
+    protected int DestroyInSeconds // Encapsulation
+    {
+        get { return destroyInSeconds; }
+        set
+        {
+            if (value < 2)
+            {
+                Debug.Log("Circles shouldn't be destroyed so quickly!");
+            }
+            else if (value > 100)
+            {
+                Debug.Log("We wouldn't want it to stay here forever, would we?");
+            }
+            else
+            {
+                destroyInSeconds = value;
+            }
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        transform.parent = null;
         
+        SetPosition(); // Abstraction
+
+        SetLifespan(); // Abstraction
+        Destroy(destroyInSeconds);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        WierdRotation();
-    }
-    
-    private void OnCollisionEnter(Collision collision)
-    {
-        
+
     }
 
-    protected abstract void WierdRotation();
+    protected virtual void SetPosition()
+    {
+        float x = Random.Range(-7, 7);
+        float y = Random.Range(3, 5);
+        float z = Random.Range(0, 20);
+
+        transform.SetPositionAndRotation(new Vector3(x, y, z), Quaternion.identity);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.onDestroy.Invoke();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject, 0.5f);
+        GameManager.trigger.Invoke(score);
+        // effect
+    }
+
+    protected abstract void SetLifespan();
+    protected abstract void Destroy(int seconds);
 }
