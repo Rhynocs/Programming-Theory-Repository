@@ -5,11 +5,11 @@ using UnityEngine;
 public abstract class Circle : MonoBehaviour
 {
     [SerializeField] protected int score;
+    
 
-    private int destroyInSeconds;
+    private int destroyInSeconds = 5;
     protected int DestroyInSeconds // Encapsulation
     {
-        get { return destroyInSeconds; }
         set
         {
             if (value < 2)
@@ -59,6 +59,7 @@ public abstract class Circle : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject, 0.5f);
+        transform.GetChild(0).gameObject.SetActive(true);
         GameManager.trigger.Invoke(score);
         // effect
     }
