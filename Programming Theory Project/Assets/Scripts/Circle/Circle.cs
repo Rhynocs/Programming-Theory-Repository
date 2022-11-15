@@ -6,6 +6,7 @@ public abstract class Circle : MonoBehaviour
 {
     [SerializeField] protected int score;
     
+    private int rotationSpeed = 90;
 
     private int destroyInSeconds = 5;
     protected int DestroyInSeconds // Encapsulation
@@ -39,16 +40,21 @@ public abstract class Circle : MonoBehaviour
 
     private void Update()
     {
-
+        RotateCircle();
     }
 
     protected virtual void SetPosition()
     {
-        float x = Random.Range(-7, 7);
+        float x = Random.Range(-6, 7);
         float y = Random.Range(3, 5);
-        float z = Random.Range(0, 20);
+        float z = Random.Range(0, 15);
 
         transform.SetPositionAndRotation(new Vector3(x, y, z), Quaternion.identity);
+    }
+
+    private void RotateCircle()
+    {
+        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
     }
 
     private void OnDestroy()

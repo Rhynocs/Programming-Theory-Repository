@@ -30,7 +30,7 @@ public class Connon : MonoBehaviour
         if (!IsInvoking() && Input.GetMouseButtonDown(0))
         {
             Instantiate(connonball, spawnPosition);
-            Invoke(nameof(BallDelay), 0.5f);
+            Invoke(nameof(BallDelay), 1);
         }
     }
 
@@ -43,6 +43,11 @@ public class Connon : MonoBehaviour
         yRotation = Mathf.Clamp(yRotation, -horizontalLimit, horizontalLimit);
 
         pivot.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+    }
+
+    public void CancelAttackDelay() 
+    {
+        CancelInvoke();
     }
 
     private void BallDelay() { }

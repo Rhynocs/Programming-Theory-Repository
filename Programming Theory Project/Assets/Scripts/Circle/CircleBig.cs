@@ -7,7 +7,7 @@ public class CircleBig : Circle // Inheritance
     // Polymorphism
     protected override void SetLifespan()
     {
-        DestroyInSeconds = 5;
+        DestroyInSeconds = 3;
     }
 
     // Polymorphism

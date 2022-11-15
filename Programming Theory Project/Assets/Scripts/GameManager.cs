@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,16 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject bigCircle;
     [SerializeField] private GameObject smallCircle;
+    [SerializeField] private GameObject trapCircle;
+    [SerializeField] private TextMeshProUGUI text;
+
+    private int score;
 
     private void Awake()
     {
         onDestroy = new UnityEvent();
         trigger = new UnityEvent<int>();
-
+        
         onDestroy.AddListener(SpawnRandomCircle);
         trigger.AddListener(AddScore);
     }
@@ -29,13 +34,14 @@ public class GameManager : MonoBehaviour
     public void SpawnRandomCircle()
     {
         float value = Random.value;
-        GameObject circle = (value > 0.2) ? bigCircle : smallCircle;
+        GameObject circle = (value > 0.4) ? bigCircle : (value > 0.2) ? smallCircle : trapCircle;
 
         Instantiate(circle, null);
     }
 
     private void AddScore(int score)
     {
-        
+        this.score += score;
+        text.text = this.score.ToString();
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Connonball : MonoBehaviour
 {
     [SerializeField] private int force;
-    
+    [SerializeField] private GameObject explosionEffect;
+
     void Start()
     {
         transform.parent = null;
@@ -14,7 +15,7 @@ public class Connonball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // explosion effect
+        Instantiate(explosionEffect, transform);
         Destroy(gameObject);
     }
 }
